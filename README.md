@@ -4,10 +4,10 @@
 
 ---
 
-- [Frontend](./frontend)
+- [Frontend](https://github.com/stump26/GGMapPay-frontend)
   - React, Typescript
 - [Backend](./backend)
-  - Typescript, GraphQL
+  - Typescript, GraphQL, serverless(lambda)
 - [DataParser](./dataParser)
   - Typescript
 

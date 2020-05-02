@@ -7,7 +7,7 @@ import schema from './graphql/schema';
 
 const app = Express();
 
-app.use(cors());
+app.use(cors({ origin: 'https://ggpaymap.com' }));
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
 
