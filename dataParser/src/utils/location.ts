@@ -1,4 +1,4 @@
-import { COORD_API, DORO_API } from '../env';
+import { COORD_API, DORO_API, KAKAO_REST_API_KEY } from '../env';
 import axios, { AxiosRequestConfig } from 'axios';
 import proj4, { toPoint } from 'proj4';
 
@@ -6,6 +6,8 @@ import qs from 'qs';
 
 const SEARCHDORO_URL = 'http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do';
 const SEARCHCOORD_URL = 'http://www.juso.go.kr/addrlink/addrCoordApiJsonp.do';
+const KAKAO_MAP_SEARCH_API_URL =
+  'https://dapi.kakao.com/v2/local/search/keyword.json';
 
 const searchDoro = async (addr: string) => {
   const data = {
@@ -50,6 +52,32 @@ const searchCOORD = async (doroJUSO: any) => {
   const filterRes = res.data.replace(/^\(|\)$/g, '');
   const jsonObj = await JSON.parse(filterRes);
   return jsonObj.results;
+};
+
+export const searchKakao = async (
+  query: string,
+  sigun: string,
+  longitude?: string | number,
+  latitude?: string | number,
+) => {
+  const url = `${KAKAO_MAP_SEARCH_API_URL}?query=${encodeURIComponent(
+    query + ' ' + sigun,
+  )}${longitude ? '&x=' + longitude : ''}${latitude ? '&y=' + latitude : ''}`;
+
+  const options: AxiosRequestConfig = {
+    method: 'GET',
+    url,
+    headers: {
+      Authorization: `KakaoAK ${KAKAO_REST_API_KEY}`,
+    },
+  };
+  try {
+    const res = await axios(options);
+    return res.data.documents;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 };
 
 const coordTransform = (x: number, y: number) => {
