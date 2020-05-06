@@ -13,6 +13,8 @@ provider:
 
   environment:
     REDIS_URI: ${ssm:/ggpaymap/redis_uri}
+    DATADREAM_API_KEY: ${ssm:/ggpaymap/DATADREAM_API_KEY}
+    NODE_ENV: production
   iamRoleStatements:
     - Effect: Allow
       Action:
