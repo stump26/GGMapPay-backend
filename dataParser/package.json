@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@types/proj4": "^2.5.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "proj4": "^2.6.1",
     "qs": "^6.9.3",
